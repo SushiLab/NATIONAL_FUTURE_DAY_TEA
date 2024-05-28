@@ -1,0 +1,46 @@
+---
+title: "assemble_pictures"
+author: "Lilith"
+date: "2024-05-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(magick)
+library(ggplot2)
+library(grid)
+library(png)
+```
+
+# read in pictures
+```{r read in}
+code_repo <- getwd()
+
+bacterium <- readPNG(paste0(code_repo, '/../pictures/bacterium.png'))
+
+magnifying_glass <- readPNG(paste0(code_repo, '/../pictures/magnifying_glass.png'))
+
+leaf <- readPNG(paste0(code_repo, '/../pictures/leaf.png')) 
+
+```
+
+# assemble pictures that were read in
+```{r assemble, echo=FALSE}
+grid.newpage()
+grid.raster(leaf,
+            x = 0.5, y = 0.5,
+            width = unit(400, "points"))
+
+grid.raster(bacterium,
+            x = 0.5, y = 0.5,
+            width = unit(50, "points"))
+
+grid.raster(bacterium,
+            x = 0.54, y = 0.52,
+            width = unit(50, "points"))
+
+grid.raster(magnifying_glass,
+            x = 0.55, y = 0.45,
+            width = unit(150, "points"))
+
+```
