@@ -1,0 +1,60 @@
+---
+title: "Zukunftstag_svg"
+author: "Lilith"
+date: "2024-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(magick)
+```
+
+
+Bilder einlesen
+```{r einlesen}
+# Organismen
+fungus_blau <- image_read_svg("../pictures/241114_Zukunftstag_Fungus_Gross_Blau-01.svg", width = 350)
+fungus_rot <- image_read_svg("../pictures/241114_Zukunftstag_Fungus_Gross_Rot-01.svg", width = 350)
+fungus_weiss <- image_read_svg("../pictures/241114_Zukunftstag_Fungus_Gross_Weiss-01.svg", width = 350)
+fungus_gelb <- image_read_svg("../pictures/241114_Zukunftstag_Fungus_Gross_Gelb-01.svg", width = 350)
+bakterium_rot <- image_read_svg("../pictures/bacteria-svgrepo-com.svg", width = 250)
+bakterium_grün <- image_read_svg("../pictures/microbe-svgrepo-com.svg", width = 350)
+bakterium_grün_rot <- image_read_svg("../pictures/bacteria-5.svg", width = 350)
+
+# Umgebungen
+blatt <- image_read_svg("../pictures/leaf-svgrepo-com.svg", width = 350)
+hand_1 <- image_read_svg("../pictures/hand-with-fingers-splayed-skin-1-svgrepo-com.svg", width = 600)
+hand_2 <- image_read_svg("../pictures/hand-with-fingers-splayed-skin-2-svgrepo-com.svg", width = 600)
+hand_3 <- image_read_svg("../pictures/hand-with-fingers-splayed-skin-3-svgrepo-com.svg", width = 600)
+hand_4 <- image_read_svg("../pictures/hand-with-fingers-splayed-skin-4-svgrepo-com.svg", width = 600)
+hand_5 <- image_read_svg("../pictures/hand-with-fingers-splayed-skin-5-svgrepo-com.svg", width = 600)
+erde <- image_read_svg("../pictures/misc-proto-dirt-pile.svg", width = 1000)
+wasser <- image_read_svg("../pictures/water-drop-svgrepo-com.svg", width = 350)
+
+# Lupen
+lupe_1 <- image_read_svg("../pictures/magnifying-glass-9-svgrepo-com.svg", width = 350)
+lupe_2 <- image_read_svg("../pictures/magnifying-glass-search-svgrepo-com.svg", width = 350)
+
+```
+
+Bilder anzeigen
+```{r plot, echo=FALSE}
+# Hintergrundfarbe
+hintergrund <- image_blank(width = 800, height = 800, color = "white") 
+# Organismus
+organismus_schräg <- image_scale(image_rotate(image_background(bakterium_rot, "none"), 10), "x100")
+# Organismus mit Umgebung kombinieren
+organismus_umgebung <- image_composite(image_scale(erde, "x200"), organismus_schräg, offset = "+220+60")
+# Organismus mit Umgebung auf den Hintergrund hinzufügen
+organismus_umgebung_hintergrund <- image_composite(hintergrund, organismus_umgebung, offset = "+0+0")
+# Lupe auf das Bild hinzufügen
+lupe_organismus_umgebung_hintergrund <- image_composite(organismus_umgebung_hintergrund, image_scale(lupe_1, "x250"), offset = "+170+20")
+# Bild anzeigen
+print(lupe_organismus_umgebung_hintergrund)
+
+```
+
+Bild speichern
+```{r plot, echo=FALSE}
+image_write(lupe_organismus_umgebung_hintergrund, path = "../mein_bild.png", format = "png")
+```
