@@ -59,14 +59,14 @@ print(hintergrund)
 ```
 
 Umgebung auf Hintergrund
-```{r plot, echo=FALSE}
+```{r Umgebung auf Hintergrund, echo=FALSE}
 # Organismus mit Umgebung auf den Hintergrund hinzufügen
 umgebung_hintergrund <- image_composite(hintergrund, image_scale(blatt, "x200"), offset = "+55+55")
 print(umgebung_hintergrund)
 ```
 
 erster Organismus auf Umgebung hinzufügen
-```{r Organismus mit Umgebung kombinieren, echo=FALSE}
+```{r erster Organismus mit Umgebung kombinieren, echo=FALSE}
 # Organismus mit Umgebung kombinieren
 organismus_umgebung <- image_composite(umgebung_hintergrund, organismus_schräg, offset = "+120+140")
 print(organismus_umgebung)
@@ -74,14 +74,14 @@ print(organismus_umgebung)
 
 
 zweiter Organismus auf den Hintergrund hinzufügen
-```{r plot, echo=FALSE}
+```{r zweiter Organismus auf den Hintergrund hinzufügen, echo=FALSE}
 # weiterer Organismus
 organismen_umgebung <- image_composite(image_scale(organismus_umgebung, "x300"), organismus_schräg_2, offset = "+150+100")
 print(organismen_umgebung)
 ```
 
 Lupe hinzufügen
-```{r plot, echo=FALSE}
+```{r Lupe hinzufügen, echo=FALSE}
 # Lupe auf das Bild hinzufügen
 lupe_organismus_umgebung_hintergrund <- image_composite(organismen_umgebung, image_scale(lupe_1, "x200"), offset = "+55+55")
 # Bild anzeigen
@@ -90,6 +90,6 @@ print(lupe_organismus_umgebung_hintergrund)
 ```
 
 Bild speichern
-```{r plot, echo=FALSE}
+```{r Bild speichern, echo=FALSE}
 image_write(lupe_organismus_umgebung_hintergrund, path = "../mein_bild.png", format = "png")
 ```
