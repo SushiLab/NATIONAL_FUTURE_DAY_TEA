@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 library(magick)
+library(rsvg)
 ```
 
 
@@ -20,6 +21,9 @@ fungus_gelb <- image_read_svg("../pictures/241114_Zukunftstag_Fungus_Gross_Gelb-
 bakterium_rot <- image_read_svg("../pictures/bacteria-svgrepo-com.svg", width = 250)
 bakterium_grün <- image_read_svg("../pictures/microbe-svgrepo-com.svg", width = 350)
 bakterium_grün_rot <- image_read_svg("../pictures/bacteria-5.svg", width = 350)
+bakterium_blau <- image_read_svg("../pictures/bacteria_blue.svg", width = 350)
+bakterium_weiss <- image_read_svg("../pictures/bacteria_white.svg", width = 350)
+
 
 # Umgebungen
 blatt <- image_read_svg("../pictures/leaf-svgrepo-com.svg", width = 350)
@@ -34,41 +38,51 @@ wasser <- image_read_svg("../pictures/water-drop-svgrepo-com.svg", width = 350)
 # Lupen
 lupe_1 <- image_read_svg("../pictures/magnifying-glass-9-svgrepo-com.svg", width = 350)
 lupe_2 <- image_read_svg("../pictures/magnifying-glass-search-svgrepo-com.svg", width = 350)
+```
 
+
+Wähle deine Organismen, Umgebung, Hintergrundsfarbe und Lupe
+```{r meine Wahl}
+mein_name = "Lilith"
+organismus_1 = bakterium_blau
+organismus_2 = fungus_weiss
+hintergrund_farbe = "lightblue"
+umgebung = blatt
+lupe = lupe_1
 ```
 
 Erster Organismus
 ```{r organismus1, echo=FALSE}
 # Organismus
-organismus_schräg <- image_scale(image_rotate(image_background(fungus_weiss, "none"), 0), "x50")
+organismus_schräg <- image_scale(image_rotate(image_background(organismus_1, "none"), 0), "x100")
 print(organismus_schräg)
 ```
 
 Zweiter Organismus
 ```{r organismus2, echo=FALSE}
 # Organismus
-organismus_schräg_2 <- image_scale(image_rotate(image_background(bakterium_rot, "none"), 0), "x20")
+organismus_schräg_2 <- image_scale(image_rotate(image_background(organismus_2, "none"), 0), "x100")
 print(organismus_schräg_2)
 ```
 
 Hintergrundfarbe
 ```{r hintergrundfarbe, echo=FALSE}
 # Hintergrundfarbe
-hintergrund <- image_blank(width = 350, height = 350, color = "lightblue")
+hintergrund <- image_blank(width = 1000, height = 1000, color = hintergrund_farbe)
 print(hintergrund)
 ```
 
 Umgebung auf Hintergrund
 ```{r Umgebung auf Hintergrund, echo=FALSE}
 # Organismus mit Umgebung auf den Hintergrund hinzufügen
-umgebung_hintergrund <- image_composite(hintergrund, image_scale(blatt, "x200"), offset = "+55+55")
+umgebung_hintergrund <- image_composite(hintergrund, image_scale(umgebung, "x500"), offset = "+100+100")
 print(umgebung_hintergrund)
 ```
 
 erster Organismus auf Umgebung hinzufügen
 ```{r erster Organismus mit Umgebung kombinieren, echo=FALSE}
 # Organismus mit Umgebung kombinieren
-organismus_umgebung <- image_composite(umgebung_hintergrund, organismus_schräg, offset = "+120+140")
+organismus_umgebung <- image_composite(umgebung_hintergrund, organismus_schräg, offset = "+350+350")
 print(organismus_umgebung)
 ```
 
@@ -76,20 +90,19 @@ print(organismus_umgebung)
 zweiter Organismus auf den Hintergrund hinzufügen
 ```{r zweiter Organismus auf den Hintergrund hinzufügen, echo=FALSE}
 # weiterer Organismus
-organismen_umgebung <- image_composite(image_scale(organismus_umgebung, "x300"), organismus_schräg_2, offset = "+150+100")
+organismen_umgebung <- image_composite(organismus_umgebung, organismus_schräg_2, offset = "+250+200")
 print(organismen_umgebung)
 ```
 
 Lupe hinzufügen
 ```{r Lupe hinzufügen, echo=FALSE}
 # Lupe auf das Bild hinzufügen
-lupe_organismus_umgebung_hintergrund <- image_composite(organismen_umgebung, image_scale(lupe_1, "x200"), offset = "+55+55")
+lupe_organismus_umgebung_hintergrund <- image_composite(organismen_umgebung, image_scale(lupe, "x600"), offset = "+135+135")
 # Bild anzeigen
 print(lupe_organismus_umgebung_hintergrund)
-
 ```
 
 Bild speichern
 ```{r Bild speichern, echo=FALSE}
-image_write(lupe_organismus_umgebung_hintergrund, path = "../mein_bild.png", format = "png")
+image_write(lupe_organismus_umgebung_hintergrund, path = paste0("../", mein_name, "_bild.png"), format = "png")
 ```
