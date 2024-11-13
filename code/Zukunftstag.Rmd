@@ -43,7 +43,7 @@ lupe_2 <- image_read_svg("../pictures/magnifying-glass-search-svgrepo-com.svg", 
 
 Wähle deine Organismen, Umgebung, Hintergrundsfarbe und Lupe
 ```{r meine Wahl}
-mein_name = "Lilith"
+mein_name = ""
 organismus_1 = bakterium_blau
 organismus_2 = fungus_weiss
 hintergrund_farbe = "lightblue"
@@ -85,7 +85,6 @@ erster Organismus auf Umgebung hinzufügen
 organismus_umgebung <- image_composite(umgebung_hintergrund, organismus_schräg, offset = "+350+350")
 print(organismus_umgebung)
 ```
-
 
 zweiter Organismus auf den Hintergrund hinzufügen
 ```{r zweiter Organismus auf den Hintergrund hinzufügen, echo=FALSE}
