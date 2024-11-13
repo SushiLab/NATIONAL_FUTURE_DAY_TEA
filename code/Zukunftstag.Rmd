@@ -51,19 +51,6 @@ umgebung = blatt
 lupe = lupe_1
 ```
 
-Erster Organismus
-```{r organismus1, echo=FALSE}
-# Organismus
-organismus_schräg <- image_scale(image_rotate(image_background(organismus_1, "none"), 0), "x100")
-print(organismus_schräg)
-```
-
-Zweiter Organismus
-```{r organismus2, echo=FALSE}
-# Organismus
-organismus_schräg_2 <- image_scale(image_rotate(image_background(organismus_2, "none"), 0), "x100")
-print(organismus_schräg_2)
-```
 
 Hintergrundfarbe
 ```{r hintergrundfarbe, echo=FALSE}
@@ -81,6 +68,8 @@ print(umgebung_hintergrund)
 
 erster Organismus auf Umgebung hinzufügen
 ```{r erster Organismus mit Umgebung kombinieren, echo=FALSE}
+# Organismus drehen
+organismus_schräg <- image_scale(image_rotate(image_background(organismus_1, "none"), 0), "x100")
 # Organismus mit Umgebung kombinieren
 organismus_umgebung <- image_composite(umgebung_hintergrund, organismus_schräg, offset = "+350+350")
 print(organismus_umgebung)
@@ -88,6 +77,7 @@ print(organismus_umgebung)
 
 zweiter Organismus auf den Hintergrund hinzufügen
 ```{r zweiter Organismus auf den Hintergrund hinzufügen, echo=FALSE}
+organismus_schräg_2 <- image_scale(image_rotate(image_background(organismus_2, "none"), 0), "x100")
 # weiterer Organismus
 organismen_umgebung <- image_composite(organismus_umgebung, organismus_schräg_2, offset = "+250+200")
 print(organismen_umgebung)
